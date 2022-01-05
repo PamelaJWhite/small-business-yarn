@@ -5,6 +5,7 @@ import { removeListing } from '../redux/actions'
 const mapStateToProps = (state) => {
     return {
         listings: state.listings,
+        username: state.username,
         logininfo: state.logininfo
     }
 }
@@ -16,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
         //that calls the key function
         //wrapped in a dispatch function
         removeListing : (index) => dispatch(removeListing(index))
-       
     }
 }
 

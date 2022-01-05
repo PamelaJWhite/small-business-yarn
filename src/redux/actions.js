@@ -25,4 +25,11 @@ export const logUserIn = (logininfo) => {
     }
 }
 
+export const addUserName = (username) => {
+    return {
+        type: "CHANGE_USERNAME",
+        value: username
+    }
+}
+
 //we'll import these objects in the reducer

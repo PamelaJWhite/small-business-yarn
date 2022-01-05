@@ -1,38 +1,131 @@
 import React from 'react'
+import { useState}  from 'react'
+import {Link} from 'react-router-dom'
+import { addUserName } from '../redux/actions'
+
+import  Home  from './HomeComponent'
+// import Home from '../containers/HomeContainer'
+
 //import material UI components
-// import {Link} from 'react-router-dom'
+import Button from "@mui/material/Button";
+import Box from '@mui/material/Box';
+import TextField from "@mui/material/TextField";
+
+
 
 
 const Login = (props) => {
+
+
+    const [username, setUserName] = useState()
+
+    let state = {
+            id: '',
+            name: username
+        }
+
     const login = (e) => {
         e.preventDefault()
-       //set cookie to be logged in
-        document.cookie = `loggedIn=true;max-age=1000`
-
-        //props.logUserIn() to set logininfo state to true
-        //this works - 
-        //e.g., the props.logininfo changes 
-        //from false to true in the Navigation component
-        //However, when window.location.assign runs
-        //the state in Navigation component goes back to false
-        // props.logUserIn()
-
-        //I stopped using this and instead
-        //changed the / page to be different
-        //contingent upon being logged in
-        // window.location.replace("/admin")
+        document.cookie = `loggedIn=true`
+        state.id = props.username.length + 1 
+        props.addUserName(state)
+        // window.location.replace("/")
         
-        window.location.replace("/")
     }
+
     return (
         <div>
-            <form onSubmit={(e) => login(e)}>
-                <input placeholder="email"/>
-                <input placeholder="password"/>
-                <button type="submit">Login</button>
-            </form>
+            <form>
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '25ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                    className="purpleMonkeys"
+                >
+                    <TextField
+                        id="standard-basic" 
+                        variant="standard"
+                        placeholder="Username"
+                        onChange={(e) => {setUserName(e.target.value)}}
+                        variant="standard"
+                    />
+                    <div></div>
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        // id="standard-basic" 
+                        variant="standard"
+                        placeholder="Password"
+                        variant="standard"
+                    />
+                    <div></div>
+                    <Button 
+                        variant="contained" 
+                        onClick={(e) => login(e)}
+                        style={{backgroundColor:"lightgrey"}}
+                    >
+                        <Link  
+                            to='/'
+                        >
+                            login 
+                        </Link>
+                    </Button>
+                </Box>
+            </form> 
         </div>
-    )
-}
+);
+};
 
 export default Login
+
+
+{/* <div>
+            <form >
+                <input 
+                    placeholder="email"
+                    onChange={(e) => {setUserName(e.target.value)}}
+                />
+                <input placeholder="password"/>
+                <button onClick={(e) => login(e)}>
+                    
+                    <Link  to='/'>
+                        login 
+                    </Link>
+                    </button> 
+            </form>
+        </div> */}
+
+
+
+
+// const [name, setName] = useState([])
+// const [address, setAddress] = useState([])
+// const [hours, setHours] = useState([])
+// const [description, setDescription] = useState([])
+
+// let state = {
+//     id: '',
+//     name: name,
+//     address: address,
+//     hours: hours,
+//     description: description
+// }
+
+
+// //add the data from the form to the list of Listings
+// const handleSubmit = (e) => {
+//     e.preventDefault()
+//     console.log("in handleSubmit in AddListing")
+//     console.log("props in handleSubmit(): ", props)
+//     //this adds the name as a 3rd item in the array;
+//     // props.addListing(name)
+//     state.id = props.listings.length + 1 
+
+//     props.addListing(state)
+    
+//     // console.log("name in handleSubmit: ", name)
+//     console.log("props in handleSubmit after my first lame attempt at props.addListing(name): ", props)   
+// }

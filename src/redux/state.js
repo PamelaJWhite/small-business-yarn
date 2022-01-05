@@ -1,8 +1,14 @@
 export default {
+    username:  [
+        {   
+            id: 1,
+            name: null
+        }
+    ],
     listings: [
         {
             id:1, 
-            name: "first business",
+            name: "Enchanted Forest Water Safari",
             description: "this is the description",
             hours: "these are the hours",
             address: "this is the address",
@@ -14,9 +20,6 @@ export default {
             hours: "2nd business hours",
             address: "2nd business address",
             map: "2nd business map this is where I figure out google maps, maybe"
-            },
-
-    ],
-
-    logininfo: false
+            }
+    ]
 }
