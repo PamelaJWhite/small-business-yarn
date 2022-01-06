@@ -9,20 +9,19 @@ const Details = (props) => {
     const listing = props.listings.find(listing => listing.id == id)
 
     return (
-        <div>
-            <h1>DETAILS page</h1>
-          
+        <main>
+            <div style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
                 <div>
-                    <h2>{listing.name}</h2>
-                    <ul>
-                        <li>Description: {listing.description}</li>
-                        <li>Hours: {listing.hours}</li>
-                        <li>Address: {listing.address}</li>
-                        <li>Map: {listing.map}</li>
-                    </ul>
+                    <h1>{listing.name}</h1>
+                    <h2>{listing.address}</h2>
+                    <h2>{listing.hours}</h2>
+                    <p>{listing.description}</p>
                 </div>
-        
-        </div>
+                <div>
+                    this is a map
+                </div>
+            </div>
+        </main>
     )
 
 }
