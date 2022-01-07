@@ -9,17 +9,27 @@ export default {
         {
             id:1, 
             name: "Enchanted Forest Water Safari",
-            description: "this is the description.Ham short loin andouille, tail leberkas chuck swine doner. Sirloin jowl landjaeger pastrami boudin pig shoulder ground round shank jerky leberkas rump ribeye filet mignon ham hock. Leberkas meatloaf bacon boudin pork, capicola shankle pork belly jowl. Kevin short ribs spare ribs ham t-bone. Brisket landjaeger ball tip, ham beef swine spare ribs tri-tip pork belly drumstick doner capicola chuck. Biltong short loin pancetta frankfurter kevin chuck venison tail doner brisket turkey kielbasa alcatra cupim porchetta. Bacon tongue cow pig beef ribs alcatra filet mignon burgdoggen rump t-bone turkey ribeye.",
+            description: "Host a glorious, unique wedding reception",
             hours: "10AM-9PM",
             address: "3183 NY-28, Old Forge, NY 13420",
-            map: "this is where I figure out google maps, maybe"
+            lat:  43.714090, 
+            lng: -74.968220
         },
         {   id: 2,
-            name: "2nd",
-            description: "2nd business is awesome",
-            hours: "2nd business hours",
-            address: "2nd business address",
-            map: "2nd business map this is where I figure out google maps, maybe"
+            name: "Oil Well",
+            description: "Get some CBD treats for your doggo with bladder cancer",
+            hours: "10AM-5PM",
+            address: "049 NY-28, Old Forge, NY 13420",
+            lat:  43.709950, 
+            lng: -74.975230
+            }, 
+        {   id: 3,
+            name: "Brinylsen's Viking Village",
+            description: "Learn to love your in-laws",
+            hours: "24/7 May-September",
+            address: "2387 S Shore - 4th Lake, Old Forge, NY",
+            lat:  43.753690, 
+            lng: -74.839090
             }
     ]
 }
