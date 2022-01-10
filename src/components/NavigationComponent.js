@@ -1,5 +1,5 @@
 // import React from 'react'
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
 import cookie from "cookie"
@@ -16,9 +16,19 @@ const Navigation = (props) => {
     const cookies = cookie.parse(document.cookie)
     console.log("cookies in Navigation ", cookies)
 
+    // useEffect(() => {
+    //     const userName = window.localStorage.getItem("saveName")
+    //     console.log("userName: ", userName)
+    //     updateFormValues(JSON.parse(userName))
+    // }, [])
+    // //useEffect with no dependency array
+    // useEffect(()=> {
+    //     window.localStorage.setItem('saveName',JSON.stringify(props.username[0].name) )
+    // })
+
     let logOut = (e) =>{
         console.log("Hey, where are you trying to go?!")
-        document.cookie = `loggedIn=false;max-age=1000`
+        document.cookie = `loggedIn=false`
         window.location.replace("/")
     }
 
@@ -43,7 +53,7 @@ const Navigation = (props) => {
                         >
                             Add
                         </Link>
-                        : console.log("no true cookies exist")
+                        : console.log("no username exists")
                     }
                     {(props.username[0].name !== null) 
                     //I think there should be some function in this link to actually log out
@@ -71,7 +81,7 @@ const Navigation = (props) => {
                     Logged in as: {props.username[0].name}
                     </div>
                 </div>
-                : console.log("no true cookies exist")
+                : console.log("no username exists")
             }
         </div>  
         ); 

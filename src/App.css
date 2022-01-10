@@ -37,6 +37,18 @@
   }
 }
 
+a:visited {
+  color:black;
+}
+.loginForm {
+  /* background-color: pink;  */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+ 
+}
+
 .addListingsBox {
   /* border:  solid 1px purple;
   background-color: yellow; */

@@ -38,4 +38,6 @@ const username = (state = [], action) =>{
     }
 
 }
+
+
 export default combineReducers({ username, logininfo, listings })

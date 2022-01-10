@@ -9,7 +9,7 @@ export default {
         {
             id:1, 
             name: "Enchanted Forest Water Safari",
-            description: "Host a glorious, unique wedding reception",
+            description: "Host a fabulous wedding reception",
             hours: "10AM-9PM",
             address: "3183 NY-28, Old Forge, NY 13420",
             lat:  43.714090, 
@@ -17,7 +17,7 @@ export default {
         },
         {   id: 2,
             name: "Oil Well",
-            description: "Get some CBD treats for your doggo with bladder cancer",
+            description: "Purchase CBD treats for your doggo with bladder cancer",
             hours: "10AM-5PM",
             address: "049 NY-28, Old Forge, NY 13420",
             lat:  43.709950, 

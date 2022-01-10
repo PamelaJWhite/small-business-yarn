@@ -23,12 +23,8 @@ const ProtectedRoute = ({children}) => {
     console.log("auth in ProtectedRoute: ", auth)
     
     return   (auth === true) ? children : <Navigate to="/login"/>
-    //I think I got it, but I'm not passing props?
-        //well, the state data are getting to the admin page so...
-            // ? <Component {...props} />
-            // : <Navigate to={{pathname: '/login', state: {from: props.location}}} />
 }
-           
+
     //below works before v6 (I tried in my Protected Routes project)
     // return (
     //   <Route

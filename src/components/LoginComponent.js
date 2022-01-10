@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState}  from 'react'
+import { useState, useEffect}  from 'react'
 import {Link} from 'react-router-dom'
 import { addUserName } from '../redux/actions'
 
@@ -15,6 +15,7 @@ import TextField from "@mui/material/TextField";
 
 
 const Login = (props) => {
+   
 
 
     const [username, setUserName] = useState()
@@ -24,9 +25,20 @@ const Login = (props) => {
             name: username
         }
 
+    // useEffect(() => {
+    //     const userName = window.localStorage.getItem("saveName")
+    //     console.log("userName: ", userName)
+    //     setUserName(JSON.parse(userName))
+    // }, [])
+
+    // //useEffect with no dependency array
+    // useEffect(()=> {
+    //     window.localStorage.setItem('saveName',JSON.stringify(props.username[0].name) )
+    // })
+
     const login = (e) => {
         e.preventDefault()
-        document.cookie = `loggedIn=true`
+        document.cookie = `loggedIn=true;Max-Age=600`
         state.id = props.username.length + 1 
         props.addUserName(state)
         // window.location.replace("/")
@@ -43,7 +55,7 @@ const Login = (props) => {
                     }}
                     noValidate
                     autoComplete="off"
-                    className="purpleMonkeys"
+                    className="loginForm"
                 >
                     <TextField
                         id="standard-basic" 
@@ -51,6 +63,7 @@ const Login = (props) => {
                         placeholder="Username"
                         onChange={(e) => {setUserName(e.target.value)}}
                         variant="standard"
+                        style={{width:"450px"}}
                     />
                     <div></div>
                     <TextField
@@ -60,14 +73,17 @@ const Login = (props) => {
                         variant="standard"
                         placeholder="Password"
                         variant="standard"
+                        style={{width:"450px"}}
                     />
                     <div></div>
                     <Button 
                         variant="contained" 
                         onClick={(e) => login(e)}
-                        style={{backgroundColor:"lightgrey"}}
+                        style={{backgroundColor:"lightgrey", width: "450px"}}
                     >
-                        <Link  
+                        <Link 
+                        
+                            style={{textDecoration:"none"}}
                             to='/'
                         >
                             login 

@@ -18,28 +18,23 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const Home = (props) => {
     
     const cookies = cookie.parse(document.cookie)
-    
-
-    console.log("props in Home component: ", props)
-    console.log("props.username in HomeComponent: ", props.username)
-    
-    
+  
     return(
-        <div style={{margin:"40px 70px"}}>
-           
+        <div style={{margin:"40px 100px"}}>
+
         <TableContainer >
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 600 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Description</TableCell>
-                        <TableCell align="right">Hours</TableCell>
-                        <TableCell align="right">Address</TableCell>
+                        <TableCell style={{width:"60px", color:"grey"}}>Name</TableCell>
+                        <TableCell align="left" style={{color:"grey"}}>Description</TableCell>
+                        <TableCell align="left" style={{width:"60px", color:"grey"}}>Hours</TableCell>
+                        <TableCell align="left"style={{width:"120px", color:"grey"}}>Address</TableCell>
                         {(props.username[0].name !== null) 
-                            ? <TableCell align="right">
+                            ? <TableCell align="left" style={{color:"grey"}}>
                                 Delete
                             </TableCell> 
-                            : console.log("no true cookies exist")
+                            : console.log("no user name")
                         }
                     </TableRow>
                 </TableHead>
@@ -54,16 +49,16 @@ const Home = (props) => {
                                     {listing.name}
                                 </Link>
                             </TableCell>
-                            <TableCell align="right">{listing.description}</TableCell>
-                            <TableCell align="right">{listing.hours}</TableCell>
-                            <TableCell align="right">{listing.address}</TableCell>
+                            <TableCell align="left">{listing.description}</TableCell>
+                            <TableCell align="left">{listing.hours}</TableCell>
+                            <TableCell align="left">{listing.address}</TableCell>
                             {(props.username[0].name !== null) 
-                                ? <TableCell align="right">
+                                ? <TableCell align="left">
                                     <Grid item xs={8}>
-                                        <DeleteIcon onClick={()=>props.removeListing(idx)}/>
+                                        <DeleteIcon style={{fill:"red"}} onClick={()=>props.removeListing(idx)}/>
                                     </Grid>
                                 </TableCell>
-                                : console.log("no true cookies exist")
+                                : console.log("no username")
                             }
                         </TableRow>
                     ))}
