@@ -16,18 +16,18 @@ function Map(props) {
     //I want to dynamically render nothing (console.log) if
     //the address from addListing has not yet been added
     //and render the current lng and lat if it has been updated.
-    useEffect(() => {
-        // console.log("useEffect")
-        return (
-            lat = props.listings[0].lat,
-            lng = props.listings[0].lng
-        )
-    })
-    console.log("lat,lng in Map: ", lat, lng)
+    // useEffect(() => {
+    //     // console.log("useEffect")
+    //     return (
+    //         lat = props.listings[0].lat,
+    //         lng = props.listings[0].lng
+    //     )
+    // })
+    // console.log("lat,lng in Map: ", lat, lng)
     // const [lat, setLat] = useState([])
     // const [lng, setLng] = useState([])
 
-    console.log("listing in Map():", listing)
+    // console.log("listing in Map():", listing)
     return (
         <GoogleMap 
             defaultZoom={10} 

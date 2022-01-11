@@ -41,7 +41,7 @@ const Details = (props) => {
 
     return (
         <main style={{display:"flex", justifyContent:"center"}}>
-            <div style={{display: "flex", flexDirection: "column", alignItems:"center", width:"450px"}}>
+            <div style={{display: "flex", flexDirection: "column", width:"450px"}}>
                 <div>
                     <h1>{listing.name}</h1>
                     <h2>{listing.address}</h2>

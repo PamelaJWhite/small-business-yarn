@@ -34,6 +34,9 @@ const AddListing = (props) => {
         lng: lng
     }
 
+    let latitude =''
+    let  longitude = ''
+
     //hold all the data that are entered
     //in the form fields
     const handleChange = (e) => {
@@ -59,63 +62,30 @@ const AddListing = (props) => {
     }
 
     const mapAddress = (e) => {
+        let key = "AIzaSyD2mZXMCOQL7L7GhT2-BS0hGjQi44x-zaU"
 
-        // let location = "22Main st Boston MA"
-        // let key = "AIzaSyD2mZXMCOQL7L7GhT2-BS0hGjQi44x-zaU"
+        // call to fetch the geocode data from google
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
+            fetch(url)
+                .then(response => response.json())
+                .then(function(data){
+                    //Log full response
+                    console.log(data)
 
-        //call to fetch the geocode data from google
-        // const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
-        //     fetch(url)
-        //         .then(response => response.json())
-        //         .then(function(data){
-        //             //Log full response
-        //             console.log(data)
-
-        //             // console.log("data.results[0].geometry.location.lat: ", data.results[0].geometry.location.lat)
-        //             setLat(data.results[0].geometry.location.lat)
-        //             console.log("lat in mapAddress: ", lat)
-        //             setLng(data.results[0].geometry.location.lng)
-        //             // updatePosition(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
-        //         }); 
-
-        //this fetch call, with the address as a parameter, works
-    //       fetch('https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyD2mZXMCOQL7L7GhT2-BS0hGjQi44x-zaU')
-    //     .then(response => response.json())
-    //     .then(data => console.log(data)); 
-    
+                    latitude = data.results[0].geometry.location.lat
+                    longitude = data.results[0].geometry.location.lng
+        
+                }).then(function(data){
+                    setLat(latitude)
+                    setLng(longitude)
+                })
     }
 
     //add the data from the form to the list of Listings
     const handleSubmit = (e) => {
         e.preventDefault()
-        // console.log("in handleSubmit in AddListing")
-        // console.log("props in handleSubmit(): ", props)
-        //this adds the name as a 3rd item in the array;
-        // props.addListing(name)
-        let key = "AIzaSyD2mZXMCOQL7L7GhT2-BS0hGjQi44x-zaU"
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
-        fetch(url)
-            .then(response => response.json())
-            .then(function(data){
-                //Log full response
-                console.log(data)
-                // console.log("data.results[0].geometry.location.lat: ", data.results[0].geometry.location.lat)
-                setLat(data.results[0].geometry.location.lat)
-                console.log("lat in mapAddress: ", lat)
-                setLng(data.results[0].geometry.location.lng)
-                // updatePosition(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
-            }).then(function(){
-                state.id = props.listings.length + 1
-                props.addListing(state)
-            })
-            
-        
-        // console.log("id in handleSubmit: ", state.id)
-
-
-        
-        // console.log("name in handleSubmit: ", name)
-        // console.log("props in handleSubmit after my first lame attempt at props.addListing(name): ", props)   
+        state.id = props.listings.length + 1
+        props.addListing(state)     
     }
 
     return (
@@ -147,7 +117,7 @@ const AddListing = (props) => {
                         variant="standard"
                         placeholder='Address'
                         name="address"
-                        // onChange={mapAddress}
+                        onChange={mapAddress}
                     />
                     <br></br>
                     <TextField className="addListingTextField"
