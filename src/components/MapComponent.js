@@ -35,13 +35,13 @@ function Map(props) {
         >
             {/* map over listings to create a marker for each */}
             {
-                (listing)
-                    ?<Marker 
+                (!listing)
+                    ?<MarkerChange/>
+                    // :console.log("no listing")
+                    :<Marker 
                     key={listing.id} 
                     position={{lat: listing.lat, lng: listing.lng}}
                     /> 
-                    // :console.log("no listing")
-                    :<MarkerChange/>
             }
         </GoogleMap>
     
