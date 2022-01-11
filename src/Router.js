@@ -5,55 +5,35 @@ import cookie from "cookie"
 import Home from './containers/HomeContainer'
 import Details from './containers/DetailsContainer'
 import Login from './containers/LoginContainer'
-import Admin from './containers/AdminContainer'
 import AddListing from './containers/AddListingContainer'
-import Navigation from './containers/NavigationContainer'
 
+//function to see if loggedIn cookies are set
 const checkAuth = (props) => {
     const cookies = cookie.parse(document.cookie)
     console.log("cookies in checkAuth: ", cookies)
     return cookies.loggedIn === 'true' ? true : false
 }
-//took out {component: Component, ...rest} and replaced with {children}
+
+//ProtectedRoute component to wrap routes that only a logged-in user can access
 const ProtectedRoute = ({children}) => {
-    // set the function equal to variable setAuth
-    //b/c can't use the function in the first part of the ternary operator in the return statement
+    // set the function equal to variable auth
     const auth = checkAuth() 
-    console.log("checkAuth() in ProtecedRoute: ", checkAuth())
-    console.log("auth in ProtectedRoute: ", auth)
     
+    //if auth is true, i.e., user is logged in,
+    //render children, i.e., addListing route
+    //else go to the login page
     return   (auth === true) ? children : <Navigate to="/login"/>
 }
 
-    //below works before v6 (I tried in my Protected Routes project)
-    // return (
-    //   <Route
-    //     // spread the rest of the props that are needed in this component
-    //     {...rest}
-    //     // define the value of the render method as a ternary that checks to see if checkAuth returns true or false
-    //     render={(props) => auth
-    //         // if true render the component with all the props
-    //         ? <Component {...props} />
-    //         // if false, use the Redirect component to update the url to `/login` so they are redirected to the login component
-    //         : <Navigate to={{pathname: '/login', state: {from: props.location}}} />}
-    //   />
-    // )
-
-
+//Router to establish all routes
 const Router = () => {
     return (
         <Routes>
+            {/* three routes to be accessed by anyone */}
             <Route path='/' element={<Home/>}/>
             <Route path='/details/:id' element={<Details/>}/>
             <Route path='/login' element={<Login/>}/>
-            <Route 
-                path='/admin'
-                element={
-                    <ProtectedRoute>
-                        <Admin/>  
-                    </ProtectedRoute>
-                }
-            />
+            {/* addListing route protected */}
             <Route 
                 path='/addListing' 
                 element={
@@ -62,9 +42,9 @@ const Router = () => {
                     </ProtectedRoute>
                     }
             />
-            
-            {/* <ProtectedRoute path='/newlisting' element={<NewListing/>}/> */}
         </Routes>
     )
 }
+
+//export to allow access to Router in other files
 export default Router

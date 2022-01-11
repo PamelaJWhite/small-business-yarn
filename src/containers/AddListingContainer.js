@@ -12,19 +12,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         
-       
         //in the dispatch function/ method
         //we call the functions that we imported
-        //in this case, addCar() and removeCar()
-        //we used the parameters car and index; what are those arguments 
-        //or from where are those arguments coming?
-         //----------------
-         //key is the function
+    
+         //key is the function - addListing
         //value is a new function
         //that calls the key function
         //wrapped in a dispatch function
         addListing : (listing) => dispatch(addListing(listing)),
-        // removeCar : (index)=>dispatch(removeCar(index))
+
     }
 }
 
