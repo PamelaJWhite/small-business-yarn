@@ -5,7 +5,6 @@ import { addUserName } from "../redux/actions"
 const mapStateToProps = (state) => {
     return {
         listings: state.listings,
-        logininfo: state.logininfo,
         username: state.username
     }
 }

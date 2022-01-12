@@ -1,15 +1,14 @@
 //import outside functionality stuff
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import MarkerChange from "../containers/MarkerContainer"
 import { GoogleMap, Marker }  from 'react-google-maps'
 
 //make me a map!
 function Map(props) {
-    //for the map on the details page, 
+    //for the map on the details page, use params 
+    //to id to get correct marker
     const { id } = useParams()
     const listing = props.listings.find(listing => listing.id == id)
-    
     return (
         <GoogleMap 
             defaultZoom={10} 
@@ -18,21 +17,22 @@ function Map(props) {
             {/* map over listings to create a marker for each */}
             {
                 (!listing)
+                    //get all the markers 
+                    //to show when adding a listing
+                    //and show the newly added marker
                     ?props.listings.map((listing, index)=>(
                         <Marker 
-                            // key={id} 
+                            key={index} 
                             position={{lat: listing.lat, lng: listing.lng}}
                         />
                     ))
-                    // ?<MarkerChange/>
-                    // :console.log("no listing")
+                    //disply only one marker on the details page
                     :<Marker 
-                    key={listing.id} 
-                    position={{lat: listing.lat, lng: listing.lng}}
+                        key={listing.id} 
+                        position={{lat: listing.lat, lng: listing.lng}}
                     /> 
             }
         </GoogleMap>
-    
     )
 }
 

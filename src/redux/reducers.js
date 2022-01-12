@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 
 const listings = (state = [], action) => {
-    
     switch(action.type) {
         case "ADD_LISTING" : 
             return [ ...state, action.value]
@@ -12,20 +11,6 @@ const listings = (state = [], action) => {
     default :
         return state
     }
-}
-const logininfo = (state = false, action) =>{
-    
-    switch(action.type) {
-        case "LOG_USER_IN" :
-            console.log("state in logininfo reducer: ", state)
-            let newState = state
-
-            newState = true
-            return newState
-    default :
-        return state
-    }
-
 }
 
 const username = (state = [], action) =>{
@@ -40,4 +25,4 @@ const username = (state = [], action) =>{
 }
 
 
-export default combineReducers({ username, logininfo, listings })
+export default combineReducers({ username, listings })

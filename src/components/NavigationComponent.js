@@ -1,37 +1,23 @@
-// import React from 'react'
-import React, { useEffect } from 'react';
+//import outside functionality stuff
+import React from 'react';
 import { Link } from 'react-router-dom'
-
 import cookie from "cookie"
 
-//import material UI pieces here
+//import the styling stuff
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+//return an dynamically rendered navigation bar
 const Navigation = (props) => {
-    console.log("in navigation, props.username[0].name", props.username[0].name)
-
+    //save the loggedIn cookie
     const cookies = cookie.parse(document.cookie)
-    console.log("cookies in Navigation ", cookies)
-
-    // useEffect(() => {
-    //     const userName = window.localStorage.getItem("saveName")
-    //     console.log("userName: ", userName)
-    //     updateFormValues(JSON.parse(userName))
-    // }, [])
-    // //useEffect with no dependency array
-    // useEffect(()=> {
-    //     window.localStorage.setItem('saveName',JSON.stringify(props.username[0].name) )
-    // })
-
+    //remove cookies when logging out
     let logOut = (e) =>{
-        console.log("Hey, where are you trying to go?!")
         document.cookie = `loggedIn=false`
         window.location.replace("/")
     }
-
     return (
         <div>
             <Box sx={{ flexGrow: 1 }}>
@@ -46,6 +32,8 @@ const Navigation = (props) => {
                         >
                             Listings
                         </Link> 
+                    {/* if the user has logged in
+                    display the link to add a listing */}
                     {(props.username[0].name !== null) 
                         ? <Link 
                             to={'/addListing'} 
@@ -53,11 +41,12 @@ const Navigation = (props) => {
                         >
                             Add
                         </Link>
-                        : console.log("no username exists")
+                        : console.log("not logged in")
                     }
+                    {/* if the user has logged in
+                    display link to log out
+                    otherwise, disply log in link */}
                     {(props.username[0].name !== null) 
-                    //I think there should be some function in this link to actually log out
-                    //and erase (?) cookies
                         ? <Link 
                             to={'/'} onClick={logOut} 
                             style={{color:"white", textDecoration:"none", margin:"0px"}}
@@ -74,6 +63,8 @@ const Navigation = (props) => {
                     </Toolbar>
                 </AppBar>
             </Box>
+            {/* if user has logged in
+            display their username under the green nav bar */}
             {(props.username[0].name !== null) 
                 ? <div>
                     <div 
@@ -81,10 +72,10 @@ const Navigation = (props) => {
                     Logged in as: {props.username[0].name}
                     </div>
                 </div>
-                : console.log("no username exists")
+                : console.log("we don't know who you are")
             }
         </div>  
-        ); 
+    ); 
 }
 
 export default Navigation

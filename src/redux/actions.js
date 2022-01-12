@@ -5,8 +5,6 @@
 export const addListing = (listing) => {
     return {
         type: "ADD_LISTING",
-        //this will not be ford or a specific name
-        //but later will be a variable that we pass in as props
         value: listing
     }
 }
@@ -15,13 +13,6 @@ export const removeListing = (index) => {
     return {
         type: "REMOVE_LISTING",
         value: index
-    }
-}
-
-export const logUserIn = (logininfo) => {
-    return {
-        type: "LOG_USER_IN",
-        value: logininfo
     }
 }
 

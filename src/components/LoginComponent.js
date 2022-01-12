@@ -15,7 +15,7 @@ const Login = (props) => {
             id: '',
             name: username
         }
-        //set cookie and username upon login
+    //set cookie and username upon login
     const login = (e) => {
         e.preventDefault()
         document.cookie = `loggedIn=true;Max-Age=600`
@@ -62,7 +62,7 @@ const Login = (props) => {
                         which now has protected functionality,
                         including add and delete listings */}
                         <Link 
-                            style={{textDecoration:"none", width:"100%"}}
+                            style={{textDecoration:"none", width:"100%", height:"100%"}}
                             to='/'
                         >
                             login 
