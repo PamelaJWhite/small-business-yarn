@@ -1,27 +1,24 @@
+//import outside functionality stuff
 import React from 'react'
-//import material UI components
 import { Link } from 'react-router-dom'
-import Navigation from '../containers/NavigationContainer'
-import cookie from 'cookie'
 
+//import styling stuff
+//import material UI components
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { AccessAlarm, ThreeDRotation } from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+//return table of listings
+//dynamically render delete functionality if user has logged in
 const Home = (props) => {
-    
-    const cookies = cookie.parse(document.cookie)
-  
+
     return(
         <div style={{margin:"40px 100px"}}>
-
         <TableContainer >
             <Table sx={{ minWidth: 600 }} aria-label="simple table">
                 <TableHead>
@@ -55,7 +52,7 @@ const Home = (props) => {
                             {(props.username[0].name !== null) 
                                 ? <TableCell align="left">
                                     <Grid item xs={8}>
-                                        <DeleteIcon style={{fill:"red"}} onClick={()=>props.removeListing(idx)}/>
+                                        <DeleteIcon className="deleteIcon" style={{fill:"red"}} onClick={()=>props.removeListing(idx)}/>
                                     </Grid>
                                 </TableCell>
                                 : console.log("no username")

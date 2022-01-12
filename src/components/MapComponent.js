@@ -1,33 +1,15 @@
-import React, { useEffect, useState } from 'react'
+//import outside functionality stuff
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import MarkerChange from "../containers/MarkerContainer"
+import { GoogleMap, Marker }  from 'react-google-maps'
 
-//withScriptjs will embed the Google script that it needs to load for the map to work correctly 
-import { GoogleMap, withScriptjs, withGoogleMap, Marker }  from 'react-google-maps'
-
-
-
+//make me a map!
 function Map(props) {
-    console.log("props in Map():", props)
+    //for the map on the details page, 
     const { id } = useParams()
     const listing = props.listings.find(listing => listing.id == id)
-    let lat = ""
-    let lng = ""
-    //I want to dynamically render nothing (console.log) if
-    //the address from addListing has not yet been added
-    //and render the current lng and lat if it has been updated.
-    // useEffect(() => {
-    //     // console.log("useEffect")
-    //     return (
-    //         lat = props.listings[0].lat,
-    //         lng = props.listings[0].lng
-    //     )
-    // })
-    // console.log("lat,lng in Map: ", lat, lng)
-    // const [lat, setLat] = useState([])
-    // const [lng, setLng] = useState([])
-
-    // console.log("listing in Map():", listing)
+    
     return (
         <GoogleMap 
             defaultZoom={10} 
@@ -36,7 +18,13 @@ function Map(props) {
             {/* map over listings to create a marker for each */}
             {
                 (!listing)
-                    ?<MarkerChange/>
+                    ?props.listings.map((listing, index)=>(
+                        <Marker 
+                            // key={id} 
+                            position={{lat: listing.lat, lng: listing.lng}}
+                        />
+                    ))
+                    // ?<MarkerChange/>
                     // :console.log("no listing")
                     :<Marker 
                     key={listing.id} 

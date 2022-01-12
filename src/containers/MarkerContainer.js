@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Marker from '../components/MarkerComponent'
+// import Marker from '../components/MarkerComponent'
 
 const mapStateToProps = (state) => {
     return {
@@ -7,4 +7,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Marker)
+// export default connect(mapStateToProps)(Marker)

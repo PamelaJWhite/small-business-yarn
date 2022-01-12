@@ -1,19 +1,20 @@
+//import outside functionality stuff
 import React, {useState} from 'react'
-// import {Link} from 'react-router-dom'
-import { GoogleMap, withScriptjs, withGoogleMap, Marker }  from 'react-google-maps'
-import axios from 'axios'
+import { withScriptjs, withGoogleMap }  from 'react-google-maps'
 
-//import my files
-import listingData from "../redux/state"
+//import local stuff 
 import Map from "../containers/MapContainer"
 
-//import material UI components
+//import styling stuff
 import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
 import TextField from "@mui/material/TextField";
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
 
+//renders form to add a new listing
+//map default is all markers
+//map loads new marker upon save
 const AddListing = (props) => {
     //create local state for each input field
     const [name, setName] = useState([])
@@ -34,76 +35,66 @@ const AddListing = (props) => {
         lng: lng
     }
 
-    let latitude =''
-    let  longitude = ''
-
     //hold all the data that are entered
     //in the form fields
     const handleChange = (e) => {
         e.preventDefault()
         console.log("e.target.value in handleChange: ", e.target.value)
         if (e.target.name === "name"){
-            // console.log("name is being entered")
             setName(e.target.value)
-            // console.log("props in handleChange(), name: ", props)
         } 
         else if (e.target.name === "address") {
-            console.log("address is changing")
             setAddress(e.target.value)
         }
         else if (e.target.name === "hours") {
-            // console.log("our hours are changing")
             setHours(e.target.value)
         }
         else if (e.target.name === "description") {
-            // console.log("what else would you like to describe ")
             setDescription(e.target.value)
         }
     }
 
+    //function to add a new marker to the map
     const mapAddress = (e) => {
-        let key = "AIzaSyD2mZXMCOQL7L7GhT2-BS0hGjQi44x-zaU"
+        //get google maps api key from .env file
+        let key = process.env.REACT_APP_GOOGLE_KEY
 
         // call to fetch the geocode data from google
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
             fetch(url)
                 .then(response => response.json())
                 .then(function(data){
-                    //Log full response
-                    console.log(data)
-
-                    latitude = data.results[0].geometry.location.lat
-                    longitude = data.results[0].geometry.location.lng
-        
-                }).then(function(data){
-                    setLat(latitude)
-                    setLng(longitude)
+                    //set latitude and longitude so marker component can use them
+                    setLat(data.results[0].geometry.location.lat)
+                    setLng(data.results[0].geometry.location.lng)
                 })
     }
 
     //add the data from the form to the list of Listings
     const handleSubmit = (e) => {
         e.preventDefault()
+        //add an id to the new listing
         state.id = props.listings.length + 1
+        //add the new listing to state
         props.addListing(state)     
     }
 
     return (
         <div  style={{display:"flex", width:"100%", margin: "40px"}}>
-                <Box
-                    component="form"
-                    sx={{
-                        '& > :not(style)': { m: 1, width: '25ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                    className="addListingsBox"
+            {/* box, left, to hold form */}
+            <Box
+                component="form"
+                sx={{
+                    '& > :not(style)': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+                className="addListingsBox"
+            >
+                <form  
+                    onChange={handleChange}
+                    style={{width:"100%"}}
                 >
-            <form  
-                onChange={handleChange}
-                style={{width:"100%"}}
-                >
-
                     <TextField className="addListingTextField"
                         id="standard-basic" 
                         variant="standard"
@@ -142,42 +133,29 @@ const AddListing = (props) => {
                     >
                         Save
                     </Button>
-                    </form> 
-                </Box>
-                <Box
-                    component="form"
-                    sx={{
-                        '& > :not(style)': { m: 1, width: '25ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                    className="addListingsBox"
-                >  
-                    <div style={{width: "450px", height:"450px"}}>
-                    {/* to the wrapped map, we need to pass a prop called googleMapURL
-                    eventually an API key will go in the {''} */}
-                        <WrappedMap 
-                            googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyD2mZXMCOQL7L7GhT2-BS0hGjQi44x-zaU`}
-                            loadingElement={<div style={{height:'100%'}}/>}
-                            containerElement={<div style={{height:'100%'}}/>}
-                            mapElement={<div style={{height:'100%'}}/>}
-                        />
-                    </div>
-
-
-                </Box>
+                </form> 
+            </Box>
+            {/* box, right, to hold map */}
+            <Box
+                component="form"
+                sx={{
+                    '& > :not(style)': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+                className="addListingsBox"
+            >  
+                <div style={{width: "450px", height:"450px"}}>
+                    <WrappedMap 
+                        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyD2mZXMCOQL7L7GhT2-BS0hGjQi44x-zaU`}
+                        loadingElement={<div style={{height:'100%'}}/>}
+                        containerElement={<div style={{height:'100%'}}/>}
+                        mapElement={<div style={{height:'100%'}}/>}
+                    />
+                </div>
+            </Box>
         </div>
     )
 }
 
 export default AddListing
-
-
- {/* <form onSubmit={handleSubmit} onChange={handleChange} >
-<input placeholder='Name' name="name" value={name}/>
-<input placeholder='Address'name="address" />
-<input placeholder='Hours'name="hours" />
-<input placeholder='Description'name="description" />
-<button>Save</button>
-<h2>a beautiful map; or hopefully a google map</h2>
-</form> */}
