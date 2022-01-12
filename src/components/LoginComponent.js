@@ -48,6 +48,7 @@ const Login = (props) => {
                         id="fullWidth"
                         variant="standard"
                         placeholder="Password"
+                        type="password"
                         variant="standard"
                         style={{width:"450px"}}
                     />
